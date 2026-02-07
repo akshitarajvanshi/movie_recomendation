@@ -1,0 +1,312 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  body {
+    background: #0f0f14;
+    color: #fff;
+  }
+  
+  /* HEADER */
+  .header {
+    background: #3d2a5c;
+    color: #fff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo span {
+    font-weight: bold;
+    font-size: 22px;
+    color: #ff4d8d;
+  }
+  
+  .header nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+  }
+  
+  .header nav a:hover {
+    color: #ff4d8d;
+  }
+  
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 80px 20px;
+  }
+  
+  .hero h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+  }
+  
+  .hero p {
+    max-width: 700px;
+    margin: auto;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  /* CONTROLS */
+  .controls {
+    background: #3d2a5c;
+    color: #fff;
+    margin: 0;
+    padding: 30px 40px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: end;
+  }
+  
+  .control {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .control label {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: none;
+    background: #1a1a1a;
+    color: #fff;
+  }
+  
+  button {
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background: #ff4d8d;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  /* MOVIES */
+  .movies {
+    padding: 60px 40px;
+    text-align: center;
+  }
+  
+  .movies h2 {
+    font-family: "Dancing Script", cursive;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  .movie-grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  
+  .movie-card {
+    background: #1e1e2e;
+    color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  
+  .movie-card:hover {
+    transform: translateY(-8px);
+  }
+  
+  .movie-poster-wrap {
+    width: 140px;
+    margin: 0 auto 15px;
+    flex-shrink: 0;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .movie-card h4 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #fff;
+  }
+  
+  .movie-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .movie-tags .tag {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .movie-tags .tag-genre {
+    background: #ff4d8d;
+    color: #fff;
+  }
+  
+  .movie-tags .tag-mood {
+    background: #e6b800;
+    color: #1a1a1a;
+  }
+
+  .movie-card .movie-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 6em;
+  }
+  
+  .movie-watch {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .movie-watch .watch-link {
+    font-size: 13px;
+    color: #7dd3fc;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .movie-watch .watch-link:hover {
+    text-decoration: underline;
+  }
+
+  .movie-watch .watch-providers {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.4;
+  }
+
+  .movie-links {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+    flex-wrap: wrap;
+  }
+
+  .movie-links a {
+    font-size: 12px;
+    color: #ff6b9d;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .movie-links a:hover {
+    text-decoration: underline;
+  }
+
+  .movie-streaming {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .movie-streaming a {
+    font-size: 12px;
+    color: #ff6b9d;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .movie-streaming a:hover {
+    text-decoration: underline;
+  }
+  
+  .error {
+    color: #ff4d4d;
+    margin-top: 15px;
+  }
+  
+  /* FEATURES */
+  .features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 60px 20px;
+    flex-wrap: wrap;
+  }
+  
+  .feature-card {
+    background: #1e1e2e;
+    color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    width: 260px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .feature-card p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background: #0a0a0e;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Add styles for the streaming platform section */
+  .movie-streaming {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .movie-streaming .streaming-link {
+    font-size: 13px;
+    color: #7dd3fc;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    background: #1a1a1a;
+  }
+  
+  .movie-streaming .streaming-link:hover {
+    background: #7dd3fc;
+    color: #1a1a1a;
+  }
