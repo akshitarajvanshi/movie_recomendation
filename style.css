@@ -191,30 +191,6 @@
     min-height: 6em;
   }
   
-  .movie-watch {
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .movie-watch .watch-link {
-    font-size: 13px;
-    color: #7dd3fc;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .movie-watch .watch-link:hover {
-    text-decoration: underline;
-  }
-
-  .movie-watch .watch-providers {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.65);
-    line-height: 1.4;
-  }
-
   .movie-links {
     display: flex;
     gap: 10px;
@@ -233,23 +209,46 @@
     text-decoration: underline;
   }
 
-  .movie-streaming {
+  .user-rating {
+    margin: 8px 0 12px;
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 6px;
   }
 
-  .movie-streaming a {
+  .user-rating-label {
     font-size: 12px;
-    color: #ff6b9d;
-    text-decoration: none;
-    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
-  .movie-streaming a:hover {
-    text-decoration: underline;
+  .user-rating-stars {
+    display: flex;
+    gap: 6px;
   }
+
+  .user-star {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.35);
+    transition: color 0.15s ease;
+  }
+
+  .user-star.filled {
+    color: #f4c84f;
+  }
+
+  .user-star:hover,
+  .user-star:focus-visible {
+    color: #f4c84f;
+    outline: none;
+  }
+
   
   .error {
     color: #ff4d4d;
@@ -288,25 +287,3 @@
   }
 
   /* Add styles for the streaming platform section */
-  .movie-streaming {
-    margin-top: 10px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  
-  .movie-streaming .streaming-link {
-    font-size: 13px;
-    color: #7dd3fc;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 6px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    background: #1a1a1a;
-  }
-  
-  .movie-streaming .streaming-link:hover {
-    background: #7dd3fc;
-    color: #1a1a1a;
-  }
