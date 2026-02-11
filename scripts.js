@@ -1,5 +1,5 @@
-// Add your free TMDB API key from https://www.themoviedb.org/settings/api (optional – fallback posters used if empty)
-const TMDB_API_KEY = "";
+// Add your free TMDB API key from https://www.themoviedb.org/settings/api (optional)
+const TMDB_API_KEY = "f0594cf25d72848a3fbc82e8c8c6572f";
 
 const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
 const TMDB_POSTER_SIZE = "w500";
@@ -91,36 +91,43 @@ function buildLogoUrl(logoPath) {
   return `${TMDB_IMAGE_BASE}/${TMDB_LOGO_SIZE}${path}`;
 }
 
+async function fetchMovieImages(tmdbId, tmdbApiKey) {
+  const imagesRes = await fetch(
+    `https://api.themoviedb.org/3/movie/${tmdbId}/images?api_key=${tmdbApiKey}`
+  );
+  if (!imagesRes.ok) return null;
+  const imagesData = await imagesRes.json();
+  return buildPosterUrl(imagesData?.posters?.[0]?.file_path);
+}
+
 async function fetchMovieDetails(movie) {
   const fallbackResult = { ...movie.fallback, tmdbId: movie.tmdbId || null, rating: movie.rating || null };
-  if (TMDB_API_KEY && TMDB_API_KEY !== "YOUR_TMDB_API_KEY") {
+  const tmdbApiKey = TMDB_API_KEY;
+  if (tmdbApiKey && tmdbApiKey !== "YOUR_TMDB_API_KEY") {
     try {
       if (movie.tmdbId) {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/movie/${movie.tmdbId}?api_key=${TMDB_API_KEY}`
+        const detailsRes = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie.tmdbId}?api_key=${tmdbApiKey}`
         );
-        const data = await res.json();
-        if (data.poster_path) {
-          return {
-            img: buildPosterUrl(data.poster_path),
-            desc: data.overview || movie.fallback.desc,
-            tmdbId: data.id,
-            rating: typeof data.vote_average === "number" ? data.vote_average : null,
-          };
-        }
+        if (!detailsRes.ok) return fallbackResult;
+        const data = await detailsRes.json();
+        const imageFromImagesApi = await fetchMovieImages(movie.tmdbId, tmdbApiKey);
         return {
-          ...fallbackResult,
-          tmdbId: movie.tmdbId,
+          img: imageFromImagesApi || buildPosterUrl(data.poster_path) || movie.fallback.img,
+          desc: data.overview || movie.fallback.desc,
+          tmdbId: data.id,
           rating: typeof data.vote_average === "number" ? data.vote_average : fallbackResult.rating,
         };
       }
-      const res = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(movie.tmdbQuery)}`
+      const searchRes = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${tmdbApiKey}&query=${encodeURIComponent(movie.tmdbQuery)}`
       );
-      const data = await res.json();
+      if (!searchRes.ok) return fallbackResult;
+      const data = await searchRes.json();
       if (data.results && data.results.length > 0) {
         const m = data.results[0];
-        const img = buildPosterUrl(m.poster_path) || movie.fallback.img;
+        const imageFromImagesApi = await fetchMovieImages(m.id, tmdbApiKey);
+        const img = imageFromImagesApi || buildPosterUrl(m.poster_path) || movie.fallback.img;
         return {
           img,
           desc: m.overview || movie.fallback.desc,
@@ -226,8 +233,11 @@ async function getRecommendations() {
   const placeholderUrl = (title) =>
     `https://placehold.co/300x450/2d2d44/ffffff?text=${encodeURIComponent(title)}`;
 
-  for (const movie of filtered) {
-    const details = await fetchMovieDetails(movie);
+  const movieWithDetails = await Promise.all(
+    filtered.map(async (movie) => ({ movie, details: await fetchMovieDetails(movie) }))
+  );
+
+  for (const { movie, details } of movieWithDetails) {
     const img = details.img || placeholderUrl(movie.title);
     const desc = extendDescription(movie, details.desc || `${movie.title} - A great pick for your mood!`);
     const posterFallback = placeholderUrl(movie.title);

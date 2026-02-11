@@ -75,7 +75,8 @@
     color: rgba(255, 255, 255, 0.9);
   }
   
-  select {
+  select,
+  .control input {
     padding: 10px 12px;
     border-radius: 8px;
     border: none;
